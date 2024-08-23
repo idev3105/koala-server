@@ -1,5 +1,12 @@
 definitions:
-  userhandler.UserDto:
+  CreateUserRequest:
+    properties:
+      idToken:
+        type: string
+      username:
+        type: string
+    type: object
+  UserDto:
     properties:
       id:
         type: string
@@ -12,31 +19,26 @@ info:
   title: Swagger Example API
   version: "1.0"
 paths:
-  /user:
+  /users:
     post:
       consumes:
       - application/json
       description: Create new user
+      operationId: CreateUser
       parameters:
-      - description: idToken
-        in: body
-        name: idToken
-        required: true
-        schema:
-          type: string
       - description: username
         in: body
-        name: username
+        name: user
         required: true
         schema:
-          type: string
+          $ref: '#/definitions/CreateUserRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/userhandler.UserDto'
+            $ref: '#/definitions/UserDto'
       security:
       - ApiKeyAuth: []
       summary: Create new user

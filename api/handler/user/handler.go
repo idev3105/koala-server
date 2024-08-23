@@ -20,15 +20,15 @@ func NewUserHandler(appCtx *app.AppContext) *UserHandler {
 }
 
 // Create new user
+// @Id CreateUser
 // @Summary Create new user
 // @Description Create new user
 // @Tags user
 // @Accept json
 // @Produce json
-// @Param idToken body string true "idToken"
-// @Param username body string true "username"
+// @Param user body CreateUserRequest true "username"
 // @Success 200 {object} UserDto
-// @Router /user [post]
+// @Router /users [post]
 // @Security ApiKeyAuth
 func (u *UserHandler) CreateUser() echo.HandlerFunc {
 	return func(ctx echo.Context) error {

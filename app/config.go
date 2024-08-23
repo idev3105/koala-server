@@ -12,17 +12,16 @@ type appConfig struct {
 	JWKsUrl     string   `mapstructure:"JWKS_URL"`
 	RedisUrl    string   `mapstructure:"REDIS_URL"`
 	KafkaHost   string   `mapstructure:"KAFKA_HOST"`
-	KafkaPort   int32    `mapstructure:"KAFKA_PORT"`
 	MongoUrl    string   `mapstructure:"MONGO_URL"`
 	MongoDbName string   `mapstructure:"MONGO_DB_NAME"`
+	KafkaPort   int32    `mapstructure:"KAFKA_PORT"`
 }
 
 func LoadConfig() (*appConfig, error) {
-
 	viper.SetConfigName(".env")
 	viper.SetConfigType("env")
 	viper.AddConfigPath(".")
-	viper.AllowEmptyEnv(false)
+	viper.AllowEmptyEnv(true)
 	viper.AutomaticEnv()
 
 	if err := viper.ReadInConfig(); err != nil {

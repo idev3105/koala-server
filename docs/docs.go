@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/user": {
+        "/users": {
             "post": {
                 "security": [
                     {
@@ -33,23 +33,15 @@ const docTemplate = `{
                     "user"
                 ],
                 "summary": "Create new user",
+                "operationId": "CreateUser",
                 "parameters": [
                     {
-                        "description": "idToken",
-                        "name": "idToken",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "description": "username",
-                        "name": "username",
+                        "name": "user",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/CreateUserRequest"
                         }
                     }
                 ],
@@ -57,7 +49,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/userhandler.UserDto"
+                            "$ref": "#/definitions/UserDto"
                         }
                     }
                 }
@@ -65,7 +57,18 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "userhandler.UserDto": {
+        "CreateUserRequest": {
+            "type": "object",
+            "properties": {
+                "idToken": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserDto": {
             "type": "object",
             "properties": {
                 "id": {

@@ -18,7 +18,6 @@ import (
 )
 
 func Create(ctx context.Context) (*Server, error) {
-
 	e := echo.New()
 	log := logger.New("Server", "create server")
 
@@ -53,16 +52,26 @@ func Create(ctx context.Context) (*Server, error) {
 		return nil, err
 	}
 
-	log.Info("Connect to mongodb " + appConfig.MongoUrl)
-	mongoCli, err := mongo.NewMongoClient(ctx, appConfig.MongoUrl, appConfig.MongoDbName)
-	if err != nil {
-		return nil, err
+	var mongoCli *mongo.Client
+	if appConfig.MongoUrl != "" {
+		log.Info("Connect to mongodb " + appConfig.MongoUrl)
+		mongoCli, err = mongo.NewMongoClient(ctx, appConfig.MongoUrl, appConfig.MongoDbName)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		log.Info("MongoDB is not configured. Skip connecting to MongoDB.")
 	}
 
-	log.Info("Connect to kafka cluster " + appConfig.KafkaHost + ":" + fmt.Sprint(appConfig.KafkaPort))
-	kafkaProducer, err := kafka.NewProducer(appConfig.KafkaHost, appConfig.KafkaPort)
-	if err != nil {
-		return nil, err
+	var kafkaProducer *kafka.Producer
+	if appConfig.KafkaHost != "" {
+		log.Info("Connect to kafka cluster " + appConfig.KafkaHost + ":" + fmt.Sprint(appConfig.KafkaPort))
+		kafkaProducer, err = kafka.NewProducer(appConfig.KafkaHost, appConfig.KafkaPort)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		log.Info("Kafka is not configured. Skip connecting to Kafka.")
 	}
 
 	// init app context instance
