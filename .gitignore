@@ -24,4 +24,8 @@ docker_data/
 # Generated files
 generated/
 
+# temporary files
 tmp/
+
+# Environment variables file
+.env
