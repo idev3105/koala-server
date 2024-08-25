@@ -19,6 +19,10 @@ func NewSqlRepository(queries *sqlc_generated.Queries) *UserSqlRepo {
 	return &UserSqlRepo{queries: queries}
 }
 
+func (r *UserSqlRepo) ExistsByUserId(ctx context.Context, userId string) (bool, error) {
+	return r.queries.ExistsUserByUserId(ctx, userId)
+}
+
 func (r *UserSqlRepo) FindByUserId(ctx context.Context, userId string) (*userentity.User, error) {
 	user, err := r.queries.FindUserByUserId(ctx, userId)
 	if err != nil {
@@ -28,7 +32,8 @@ func (r *UserSqlRepo) FindByUserId(ctx context.Context, userId string) (*userent
 }
 
 func (r *UserSqlRepo) Save(ctx context.Context, user *userentity.User) (*userentity.User, error) {
-	prams := sqlc_generated.SaveUserParams{UserId: user.UserId,
+	prams := sqlc_generated.SaveUserParams{
+		UserId:   user.UserId,
 		Username: pgtype.Text{String: user.Username, Valid: true},
 	}
 	if user.CreatedBy != nil {

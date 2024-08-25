@@ -1,4 +1,14 @@
 definitions:
+  CheckUserByIdTokenRequest:
+    properties:
+      idToken:
+        type: string
+    type: object
+  CheckUserByIdTokenResponse:
+    properties:
+      exist:
+        type: boolean
+    type: object
   CreateUserRequest:
     properties:
       idToken:
@@ -42,6 +52,51 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: Create new user
+      tags:
+      - user
+  /users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get user by user id
+      operationId: GetUserByUserId
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/UserDto'
+      summary: Get user by user id
+      tags:
+      - user
+  /users/exists:
+    post:
+      consumes:
+      - application/json
+      description: Check user exist
+      operationId: existsUserByIdToken
+      parameters:
+      - description: idToken
+        in: body
+        name: idToken
+        required: true
+        schema:
+          $ref: '#/definitions/CheckUserByIdTokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/CheckUserByIdTokenResponse'
+      summary: Check exist user by id token
       tags:
       - user
 swagger: "2.0"

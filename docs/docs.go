@@ -54,9 +54,93 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/users/exists": {
+            "post": {
+                "description": "Check user exist",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Check exist user by id token",
+                "operationId": "existsUserByIdToken",
+                "parameters": [
+                    {
+                        "description": "idToken",
+                        "name": "idToken",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CheckUserByIdTokenRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CheckUserByIdTokenResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "description": "Get user by user id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get user by user id",
+                "operationId": "GetUserByUserId",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UserDto"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "CheckUserByIdTokenRequest": {
+            "type": "object",
+            "properties": {
+                "idToken": {
+                    "type": "string"
+                }
+            }
+        },
+        "CheckUserByIdTokenResponse": {
+            "type": "object",
+            "properties": {
+                "exist": {
+                    "type": "boolean"
+                }
+            }
+        },
         "CreateUserRequest": {
             "type": "object",
             "properties": {

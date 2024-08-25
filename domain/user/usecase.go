@@ -19,6 +19,10 @@ func NewUserUseCase(repo UserRepository) *userUseCase {
 	}
 }
 
+func (s *userUseCase) ExistsByUserId(ctx context.Context, userId string) (bool, error) {
+	return s.repo.ExistsByUserId(ctx, userId)
+}
+
 func (s *userUseCase) FindByUserId(ctx context.Context, userId string) (*userentity.User, error) {
 	return s.repo.FindByUserId(ctx, userId)
 }

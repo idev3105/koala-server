@@ -12,5 +12,6 @@ func NewUserRouter(e *echo.Group, appCtx *app.AppContext) {
 	{
 		g.POST("", handler.CreateUser())
 		g.GET("/:id", handler.GetUserByUserId())
+		g.POST("/exists", handler.ExistsUserByIdToken())
 	}
 }

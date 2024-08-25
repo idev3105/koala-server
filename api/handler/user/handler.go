@@ -41,7 +41,7 @@ func (u *UserHandler) CreateUser() echo.HandlerFunc {
 
 		token, err := tokenutil.Parse(ctx.Request().Context(), data.IdToken, u.appCtx.Config.JWKsUrl)
 		if err != nil {
-			return echo.NewHTTPError(http.StatusBadRequest, "Token is invalid")
+			return echo.NewHTTPError(http.StatusBadRequest, err)
 		}
 		userId := token.Subject()
 
@@ -59,6 +59,15 @@ func (u *UserHandler) CreateUser() echo.HandlerFunc {
 }
 
 // Get user by user id
+// @Id GetUserByUserId
+// @Summary Get user by user id
+// @Description Get user by user id
+// @Tags user
+// @Accept json
+// @Produce json
+// @Param id path string true "User ID"
+// @Success 200 {object} UserDto
+// @Router /users/{id} [get]
 func (u *UserHandler) GetUserByUserId() echo.HandlerFunc {
 	return func(ctx echo.Context) error {
 		userId := ctx.Param("id")
@@ -73,5 +82,38 @@ func (u *UserHandler) GetUserByUserId() echo.HandlerFunc {
 			Id:       user.UserId,
 			Username: user.Username,
 		})
+	}
+}
+
+// Check exist user by token
+// @Id existsUserByIdToken
+// @Summary Check exist user by id token
+// @Description Check user exist
+// @Tags user
+// @Accept json
+// @Produce json
+// @Param idToken body CheckUserByIdTokenRequest true "idToken"
+// @Success 200 {object} CheckUserByIdTokenResponse
+// @Router /users/exists [post]
+func (u *UserHandler) ExistsUserByIdToken() echo.HandlerFunc {
+	return func(ctx echo.Context) error {
+		var data CheckUserByIdTokenRequest
+		err := (&echo.DefaultBinder{}).BindBody(ctx, &data)
+		if err != nil {
+			panic(err)
+		}
+		token, err := tokenutil.Parse(ctx.Request().Context(), data.IdToken, u.appCtx.Config.JWKsUrl)
+		if err != nil {
+			return echo.NewHTTPError(http.StatusBadRequest, err)
+		}
+		userId := token.Subject()
+
+		userUseCase := di.NewUserUseCase(sqlc_generated.New(u.appCtx.Db), u.appCtx.RedisCli)
+		exist, err := userUseCase.ExistsByUserId(ctx.Request().Context(), userId)
+		if err != nil {
+			panic(err)
+		}
+
+		return ctx.JSON(http.StatusOK, CheckUserByIdTokenResponse{Exist: exist})
 	}
 }

@@ -19,8 +19,11 @@ func New(sqlRepo *UserSqlRepo, cacheRepo *UserCacheRepo) *UserRepository {
 	}
 }
 
-func (r *UserRepository) FindByUserId(ctx context.Context, userId string) (*userentity.User, error) {
+func (r *UserRepository) ExistsByUserId(ctx context.Context, userId string) (bool, error) {
+	return r.sqlRepo.ExistsByUserId(ctx, userId)
+}
 
+func (r *UserRepository) FindByUserId(ctx context.Context, userId string) (*userentity.User, error) {
 	log := logger.New("UserRepository", "FindByUserId")
 
 	if user, err := r.cacheRepo.FindById(ctx, userId); err == nil {
