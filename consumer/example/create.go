@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"org.idev.bunny/backend/app"
-	"org.idev.bunny/backend/component/kafka"
+	"org.idev.koala/backend/app"
+	"org.idev.koala/backend/component/kafka"
 )
 
 func New(groupID string, topics []string) (*ExampleConsumer, error) {

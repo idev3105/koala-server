@@ -7,8 +7,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"org.idev.bunny/backend/common/errors"
-	"org.idev.bunny/backend/utils"
+	"org.idev.koala/backend/common/errors"
+	"org.idev.koala/backend/utils"
 )
 
 type Client struct {

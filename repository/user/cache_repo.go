@@ -3,8 +3,8 @@ package userrepository
 import (
 	"context"
 
-	"org.idev.bunny/backend/component/redis"
-	userentity "org.idev.bunny/backend/domain/user/entity"
+	"org.idev.koala/backend/component/redis"
+	userentity "org.idev.koala/backend/domain/user/entity"
 )
 
 type UserCacheRepo struct {
@@ -17,7 +17,7 @@ func NewCacheRepository(redisCli *redis.RedisClient) *UserCacheRepo {
 }
 
 // Generate by command:
-// GoImpl org.idev.bunny/backend/domain/user.UserCacheRepository
+// GoImpl org.idev.koala/backend/domain/user.UserCacheRepository
 func (c *UserCacheRepo) FindById(ctx context.Context, userId string) (*userentity.User, error) {
 	var user userentity.User
 	err := c.redisCli.GetStruct(ctx, userId, &user)

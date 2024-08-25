@@ -3,8 +3,8 @@ package userrepository
 import (
 	"context"
 
-	"org.idev.bunny/backend/common/logger"
-	userentity "org.idev.bunny/backend/domain/user/entity"
+	"org.idev.koala/backend/common/logger"
+	userentity "org.idev.koala/backend/domain/user/entity"
 )
 
 type UserRepository struct {

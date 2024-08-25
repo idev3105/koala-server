@@ -2,8 +2,8 @@ package mapper
 
 import (
 	"github.com/jackc/pgx/v5/pgtype"
-	userentity "org.idev.bunny/backend/domain/user/entity"
-	sqlc_generated "org.idev.bunny/backend/generated/sqlc"
+	userentity "org.idev.koala/backend/domain/user/entity"
+	sqlc_generated "org.idev.koala/backend/generated/sqlc"
 )
 
 func MapToDomain(u sqlc_generated.User) *userentity.User {

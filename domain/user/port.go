@@ -3,7 +3,7 @@ package userdomain
 import (
 	"context"
 
-	userentity "org.idev.bunny/backend/domain/user/entity"
+	userentity "org.idev.koala/backend/domain/user/entity"
 )
 
 type UserRepository interface {

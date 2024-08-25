@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/IBM/sarama"
-	"org.idev.bunny/backend/common/logger"
+	"org.idev.koala/backend/common/logger"
 )
 
 type ConsumerGroup struct {

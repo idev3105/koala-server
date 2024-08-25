@@ -2,12 +2,12 @@ package middleware
 
 import (
 	"github.com/labstack/echo/v4"
-	"org.idev.bunny/backend/api/di"
-	"org.idev.bunny/backend/api/enum"
-	"org.idev.bunny/backend/app"
-	"org.idev.bunny/backend/common/logger"
-	sqlc_generated "org.idev.bunny/backend/generated/sqlc"
-	tokenutil "org.idev.bunny/backend/utils/token"
+	"org.idev.koala/backend/api/di"
+	"org.idev.koala/backend/api/enum"
+	"org.idev.koala/backend/app"
+	"org.idev.koala/backend/common/logger"
+	sqlc_generated "org.idev.koala/backend/generated/sqlc"
+	tokenutil "org.idev.koala/backend/utils/token"
 )
 
 func AuthGuard(appCtx *app.AppContext) echo.MiddlewareFunc {

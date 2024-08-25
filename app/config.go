@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/spf13/viper"
-	"org.idev.bunny/backend/api/enum"
+	"org.idev.koala/backend/api/enum"
 )
 
 type appConfig struct {

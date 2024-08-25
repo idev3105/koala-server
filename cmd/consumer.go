@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"github.com/spf13/cobra"
-	exampleconsumer "org.idev.bunny/backend/consumer/example"
+	exampleconsumer "org.idev.koala/backend/consumer/example"
 )
 
 func NewConsumerCmd() *cobra.Command {

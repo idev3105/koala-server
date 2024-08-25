@@ -4,10 +4,10 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"org.idev.bunny/backend/api/di"
-	"org.idev.bunny/backend/app"
-	sqlc_generated "org.idev.bunny/backend/generated/sqlc"
-	tokenutil "org.idev.bunny/backend/utils/token"
+	"org.idev.koala/backend/api/di"
+	"org.idev.koala/backend/app"
+	sqlc_generated "org.idev.koala/backend/generated/sqlc"
+	tokenutil "org.idev.koala/backend/utils/token"
 )
 
 // User gin handler

@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/labstack/echo/v4"
-	"org.idev.bunny/backend/app"
-	"org.idev.bunny/backend/common/logger"
+	"org.idev.koala/backend/app"
+	"org.idev.koala/backend/common/logger"
 )
 
 var AppCtx *app.AppContext

@@ -4,10 +4,10 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"org.idev.bunny/backend/cmd"
-	"org.idev.bunny/backend/common/errors"
-	"org.idev.bunny/backend/common/logger"
-	_ "org.idev.bunny/backend/docs"
+	"org.idev.koala/backend/cmd"
+	"org.idev.koala/backend/common/errors"
+	"org.idev.koala/backend/common/logger"
+	_ "org.idev.koala/backend/docs"
 )
 
 // @title Swagger Example API

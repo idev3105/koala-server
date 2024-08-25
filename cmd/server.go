@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"org.idev.bunny/backend/api/server"
+	"org.idev.koala/backend/api/server"
 )
 
 func NewServerCommand() *cobra.Command {

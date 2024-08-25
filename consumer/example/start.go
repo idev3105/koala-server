@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"org.idev.bunny/backend/common/logger"
+	"org.idev.koala/backend/common/logger"
 )
 
 func (ec *ExampleConsumer) Start(ctx context.Context) error {

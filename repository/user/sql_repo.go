@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	userentity "org.idev.bunny/backend/domain/user/entity"
-	sqlc_generated "org.idev.bunny/backend/generated/sqlc"
-	"org.idev.bunny/backend/mapper"
+	userentity "org.idev.koala/backend/domain/user/entity"
+	sqlc_generated "org.idev.koala/backend/generated/sqlc"
+	"org.idev.koala/backend/mapper"
 )
 
 type UserSqlRepo struct {

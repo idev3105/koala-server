@@ -2,8 +2,8 @@ package route
 
 import (
 	"github.com/labstack/echo/v4"
-	userhandler "org.idev.bunny/backend/api/handler/user"
-	"org.idev.bunny/backend/app"
+	userhandler "org.idev.koala/backend/api/handler/user"
+	"org.idev.koala/backend/app"
 )
 
 func NewUserRouter(e *echo.Group, appCtx *app.AppContext) {

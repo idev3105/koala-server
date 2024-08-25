@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	"org.idev.bunny/backend/common/logger"
-	commonenum "org.idev.bunny/backend/domain/common/enum"
-	userentity "org.idev.bunny/backend/domain/user/entity"
+	"org.idev.koala/backend/common/logger"
+	commonenum "org.idev.koala/backend/domain/common/enum"
+	userentity "org.idev.koala/backend/domain/user/entity"
 )
 
 type userUseCase struct {

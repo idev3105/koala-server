@@ -1,6 +1,6 @@
 package userentity
 
-import commonentity "org.idev.bunny/backend/domain/common/entity"
+import commonentity "org.idev.koala/backend/domain/common/entity"
 
 type User struct {
 	commonentity.BaseEntity

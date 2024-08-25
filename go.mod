@@ -1,4 +1,4 @@
-module org.idev.bunny/backend
+module org.idev.koala/backend
 
 go 1.22.3
 
