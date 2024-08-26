@@ -1,9 +1,9 @@
 package movieenum
 
-type EspisodeStatus string
+type ProgressionStatus string
 
 const (
-	MovieStatus_Upcoming EspisodeStatus = "UPCOMING"
-	MovieStatus_OnGoing  EspisodeStatus = "ONGOING"
-	MovieStatus_Ended    EspisodeStatus = "ENDED"
+	ProgressionStatus_Upcoming ProgressionStatus = "UPCOMING"
+	ProgressionStatus_OnGoing  ProgressionStatus = "ONGOING"
+	ProgressionStatus_Ended    ProgressionStatus = "ENDED"
 )
