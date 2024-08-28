@@ -7,6 +7,7 @@ import (
 
 type Episode struct {
 	commonentity.BaseEntity
+	Id               int32                      `json:"id,omitempty"`
 	Name             string                     `json:"name,omitempty"`
 	ThumbnailUrl     string                     `json:"thumbnailUrl,omitempty"`
 	OriginalVideoUrl string                     `json:"originalVideoUrl,omitempty"`

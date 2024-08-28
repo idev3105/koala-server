@@ -9,11 +9,31 @@ definitions:
       exist:
         type: boolean
     type: object
+  CreateMovieRequest:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+      thumbnailUrl:
+        type: string
+    type: object
   CreateUserRequest:
     properties:
       idToken:
         type: string
       username:
+        type: string
+    type: object
+  MovieDto:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      thumbnailUrl:
         type: string
     type: object
   UserDto:
@@ -29,6 +49,30 @@ info:
   title: Swagger Example API
   version: "1.0"
 paths:
+  /movies:
+    post:
+      consumes:
+      - application/json
+      operationId: CreateMovie
+      parameters:
+      - description: name
+        in: body
+        name: movie
+        required: true
+        schema:
+          $ref: '#/definitions/CreateMovieRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/MovieDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Create new movie
+      tags:
+      - movie
   /users:
     post:
       consumes:

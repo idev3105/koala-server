@@ -91,6 +91,7 @@ func Create(ctx context.Context) (*Server, error) {
 	v1 := e.Group("/api/v1")
 	{
 		route.NewUserRouter(v1, AppCtx)
+		route.NewMovieRouter(v1, AppCtx)
 	}
 
 	return &Server{e: e}, nil

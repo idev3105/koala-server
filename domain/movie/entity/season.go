@@ -8,6 +8,7 @@ import (
 
 type Season struct {
 	commonentity.BaseEntity
+	Id                int32                       `json:"id,omitempty"`
 	ProgressionStatus movieenum.ProgressionStatus `json:"progressionStatus,omitempty"`
 	Description       string                      `json:"description,omitempty"`
 	ThumbnailUrl      string                      `json:"thumbnailUrl,omitempty"`
