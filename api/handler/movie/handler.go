@@ -33,10 +33,10 @@ func NewMovieHandler(appCtx *app.AppContext) *MovieHandler {
 func (handler *MovieHandler) CreateMovie() echo.HandlerFunc {
 	return func(ctx echo.Context) error {
 		var data CreateMovieRequest
-		err := (&echo.DefaultBinder{}).BindBody(ctx, &data)
-		if err != nil {
-			panic(err)
+		if err := ctx.Bind(&data); err != nil {
+			return ctx.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid request body"})
 		}
+
 		movieUseCase := di.NewMovieUseCase()
 		movie := &movieentity.Movie{
 			Name:         data.Name,
@@ -44,14 +44,15 @@ func (handler *MovieHandler) CreateMovie() echo.HandlerFunc {
 			ThumbnailUrl: data.ThumbnailUrl,
 		}
 
-		movie, err = movieUseCase.CreateMovie(ctx.Request().Context(), movie)
+		createdMovie, err := movieUseCase.CreateMovie(ctx.Request().Context(), movie)
 		if err != nil {
-			panic(err)
+			return ctx.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to create movie"})
 		}
-		return ctx.JSON(http.StatusOK, MovieDto{
-			Id:          movie.Id,
-			Name:        movie.Name,
-			Description: movie.Description,
+
+		return ctx.JSON(http.StatusCreated, MovieDto{
+			Id:          createdMovie.Id,
+			Name:        createdMovie.Name,
+			Description: createdMovie.Description,
 		})
 	}
 }
