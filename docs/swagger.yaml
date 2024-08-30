@@ -43,6 +43,11 @@ definitions:
       username:
         type: string
     type: object
+  VoteMovieRequest:
+    properties:
+      voteType:
+        type: string
+    type: object
 info:
   contact: {}
   description: This is a sample server Petstore server.
@@ -71,6 +76,36 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: Create new movie
+      tags:
+      - movie
+  /movies/{id}/vote:
+    post:
+      consumes:
+      - application/json
+      description: Upvote or downvote a movie
+      operationId: VoteMovie
+      parameters:
+      - description: Movie ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Vote details
+        in: body
+        name: vote
+        required: true
+        schema:
+          $ref: '#/definitions/VoteMovieRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/MovieDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Vote for a movie
       tags:
       - movie
   /users:
