@@ -14,3 +14,7 @@ type MovieDto struct {
 	ThumbnailUrl string `json:"thumbnailUrl"`
 	// TODO: Add more
 } // @name MovieDto
+
+type VoteMovieRequest struct {
+	VoteType string `json:"voteType"`
+} // @name VoteMovieRequest

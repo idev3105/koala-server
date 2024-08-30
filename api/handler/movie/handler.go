@@ -56,3 +56,39 @@ func (handler *MovieHandler) CreateMovie() echo.HandlerFunc {
 		})
 	}
 }
+
+// VoteMovie handles upvoting or downvoting a movie
+// @Id VoteMovie
+// @Summary Vote for a movie
+// @Description Upvote or downvote a movie
+// @Tags movie
+// @Accept json
+// @Produce json
+// @Param id path string true "Movie ID"
+// @Param vote body VoteMovieRequest true "Vote details"
+// @Success 200 {object} MovieDto
+// @Router /movies/{id}/vote [post]
+// @Security ApiKeyAuth
+func (handler *MovieHandler) VoteMovie() echo.HandlerFunc {
+	return func(ctx echo.Context) error {
+		movieID := ctx.Param("id")
+		userID := ctx.Get("user_id").(string)
+
+		var data VoteMovieRequest
+		if err := ctx.Bind(&data); err != nil {
+			return ctx.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid request body"})
+		}
+
+		movieUseCase := di.NewMovieUseCase()
+		updatedMovie, err := movieUseCase.VoteMovie(ctx.Request().Context(), movieID, userID, data.VoteType == "up")
+		if err != nil {
+			return ctx.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to vote for movie"})
+		}
+
+		return ctx.JSON(http.StatusOK, MovieDto{
+			Id:          updatedMovie.Id,
+			Name:        updatedMovie.Name,
+			Description: updatedMovie.Description,
+		})
+	}
+}
