@@ -8,9 +8,9 @@ services:
       - KEYCLOAK_ADMIN_PASSWORD=admin # change to your admin password
       - KEYCLOAK_DATABASE_HOST=postgresql
       - KEYCLOAK_DATABASE_PORT=5432
-      - KEYCLOAK_DATABASE_USER=bunny # change to your username
-      - KEYCLOAK_DATABASE_NAME=bunny # change to your database name
-      - KEYCLOAK_DATABASE_PASSWORD=bunny # change to your password
+      - KEYCLOAK_DATABASE_USER=koala # change to your username
+      - KEYCLOAK_DATABASE_NAME=koala # change to your database name
+      - KEYCLOAK_DATABASE_PASSWORD=koala # change to your password
       - KEYCLOAK_DATABASE_SCHEMA=keycloak
     volumes:
       - ./docker_data/keycloak:/bitnami/keycloak/data
@@ -19,7 +19,7 @@ services:
   redis:
     image: bitnami/redis:7.0.15
     environment:
-      - REDIS_PASSWORD=bunny # change to your password
+      - REDIS_PASSWORD=koala # change to your password
     ports:
       - 6379:6379
     volumes:
@@ -31,9 +31,9 @@ services:
     volumes:
       - ./docker_data/postgres:/bitnami/postgresql
     environment:
-      - POSTGRESQL_USERNAME=bunny # change to your username
-      - POSTGRESQL_PASSWORD=bunny # change to yser password
-      - POSTGRESQL_DATABASE=bunny # change to your database name
+      - POSTGRESQL_USERNAME=koala # change to your username
+      - POSTGRESQL_PASSWORD=koala # change to yser password
+      - POSTGRESQL_DATABASE=koala # change to your database name
   bytebase:
     image: bytebase/bytebase:2.16.0
     ports:
@@ -61,9 +61,9 @@ services:
     environment:
       MONGODB_ROOT_USER: root # change it
       MONGODB_ROOT_PASSWORD: password # change it
-      MONGODB_USERNAME: bunny # change it
-      MONGODB_PASSWORD: bunny # change it
-      MONGODB_DATABASE: bunny # change it
+      MONGODB_USERNAME: koala # change it
+      MONGODB_PASSWORD: koala # change it
+      MONGODB_DATABASE: koala # change it
     volumes:
       - ./docker_data/mongodb:/bitnami/mongodb
     ports:

@@ -11,7 +11,7 @@ import (
 
 func TestRedisSetAString(t *testing.T) {
 	ctx := context.TODO()
-	redisCli, err := NewClient(ctx, "redis://:bunny@localhost:6379/0")
+	redisCli, err := NewClient(ctx, "redis://:koala@localhost:6379/0")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23,7 +23,7 @@ func TestRedisSetAString(t *testing.T) {
 
 func TestRedisSetAInterface(t *testing.T) {
 	ctx := context.TODO()
-	redisCli, err := NewClient(ctx, "redis://:bunny@localhost:6379/0")
+	redisCli, err := NewClient(ctx, "redis://:koala@localhost:6379/0")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -38,7 +38,7 @@ func TestRedisSetAInterface(t *testing.T) {
 
 func TestRedisGetStructNotFound(t *testing.T) {
 	ctx := context.TODO()
-	redisCli, err := NewClient(ctx, "redis://:bunny@localhost:6379/0")
+	redisCli, err := NewClient(ctx, "redis://:koala@localhost:6379/0")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -59,7 +59,7 @@ func TestRedisGetStructNotFound(t *testing.T) {
 
 func TestRedisGetStruct(t *testing.T) {
 	ctx := context.TODO()
-	redisCli, err := NewClient(ctx, "redis://:bunny@localhost:6379/0")
+	redisCli, err := NewClient(ctx, "redis://:koala@localhost:6379/0")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -75,7 +75,7 @@ func TestRedisGetStruct(t *testing.T) {
 
 func TestRedisSetAInt(t *testing.T) {
 	ctx := context.TODO()
-	redisCli, err := NewClient(ctx, "redis://:bunny@localhost:6379/0")
+	redisCli, err := NewClient(ctx, "redis://:koala@localhost:6379/0")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -88,7 +88,7 @@ func TestRedisSetAInt(t *testing.T) {
 
 func TestDelete(t *testing.T) {
 	ctx := context.TODO()
-	redisCli, err := NewClient(ctx, "redis://:bunny@localhost:6379/0")
+	redisCli, err := NewClient(ctx, "redis://:koala@localhost:6379/0")
 	if err != nil {
 		t.Fatal(err)
 	}

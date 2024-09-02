@@ -20,4 +20,4 @@ FROM golang:1.22-alpine
 WORKDIR /app
 COPY --from=build /app/megacrm .
 COPY .env.example .env
-CMD [ "./bunny", "server" ]
+CMD [ "./koala", "server" ]

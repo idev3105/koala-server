@@ -8,14 +8,14 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	echoSwagger "github.com/swaggo/echo-swagger"
-	appMiddleware "org.idev.bunny/backend/api/middleware"
-	"org.idev.bunny/backend/api/route"
-	"org.idev.bunny/backend/app"
-	"org.idev.bunny/backend/common/errors"
-	"org.idev.bunny/backend/common/logger"
-	"org.idev.bunny/backend/component/kafka"
-	"org.idev.bunny/backend/component/mongo"
-	"org.idev.bunny/backend/component/redis"
+	appMiddleware "org.idev.koala/backend/api/middleware"
+	"org.idev.koala/backend/api/route"
+	"org.idev.koala/backend/app"
+	"org.idev.koala/backend/common/errors"
+	"org.idev.koala/backend/common/logger"
+	"org.idev.koala/backend/component/kafka"
+	"org.idev.koala/backend/component/mongo"
+	"org.idev.koala/backend/component/redis"
 )
 
 func Create(ctx context.Context) (*Server, error) {

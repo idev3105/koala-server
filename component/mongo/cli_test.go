@@ -8,11 +8,11 @@ import (
 
 func TestSaveAMap(t *testing.T) {
 	ctx := context.TODO()
-	cli, err := NewMongoClient(ctx, "mongodb://bunny:bunny@localhost:27017/bunny", "bunny")
+	cli, err := NewMongoClient(ctx, "mongodb://koala:koala@localhost:27017/koala", "koala")
 	if err != nil {
 		t.Errorf("Failed to create mongo client: %v", err)
 	}
-	insertedID, err := cli.SaveOne(ctx, "test", map[string]string{"name": "bunny"})
+	insertedID, err := cli.SaveOne(ctx, "test", map[string]string{"name": "koala"})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21,14 +21,14 @@ func TestSaveAMap(t *testing.T) {
 
 func TestSaveAStruct(t *testing.T) {
 	ctx := context.TODO()
-	cli, err := NewMongoClient(ctx, "mongodb://bunny:bunny@localhost:27017/bunny", "bunny")
+	cli, err := NewMongoClient(ctx, "mongodb://koala:koala@localhost:27017/koala", "koala")
 	if err != nil {
 		t.Errorf("Failed to create mongo client: %v", err)
 	}
 	type Test struct {
 		Name string
 	}
-	insertedID, err := cli.SaveOne(ctx, "test", Test{"bunny"})
+	insertedID, err := cli.SaveOne(ctx, "test", Test{"koala"})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -37,14 +37,14 @@ func TestSaveAStruct(t *testing.T) {
 
 func TestSaveManyStruct(t *testing.T) {
 	ctx := context.TODO()
-	cli, err := NewMongoClient(ctx, "mongodb://bunny:bunny@localhost:27017/bunny", "bunny")
+	cli, err := NewMongoClient(ctx, "mongodb://koala:koala@localhost:27017/koala", "koala")
 	if err != nil {
 		t.Errorf("Failed to create mongo client: %v", err)
 	}
 	type Test struct {
 		Name string
 	}
-	err = cli.SaveMany(ctx, "test", []interface{}{Test{"bunny2"}, Test{"bunny2"}})
+	err = cli.SaveMany(ctx, "test", []interface{}{Test{"koala2"}, Test{"koala2"}})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -52,7 +52,7 @@ func TestSaveManyStruct(t *testing.T) {
 
 func TestGetStruct(t *testing.T) {
 	ctx := context.TODO()
-	cli, err := NewMongoClient(ctx, "mongodb://bunny:bunny@localhost:27017/bunny", "bunny")
+	cli, err := NewMongoClient(ctx, "mongodb://koala:koala@localhost:27017/koala", "koala")
 	if err != nil {
 		t.Errorf("Failed to create mongo client: %v", err)
 	}
@@ -60,18 +60,18 @@ func TestGetStruct(t *testing.T) {
 		Name string
 	}
 	var target Test
-	err = cli.FindOne(ctx, "test", map[string]any{"name": "bunny"}, &target)
+	err = cli.FindOne(ctx, "test", map[string]any{"name": "koala"}, &target)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if target.Name != "bunny" {
-		t.Errorf("Expected bunny, got %v", target.Name)
+	if target.Name != "koala" {
+		t.Errorf("Expected koala, got %v", target.Name)
 	}
 }
 
 func TestGetList(t *testing.T) {
 	ctx := context.TODO()
-	cli, err := NewMongoClient(ctx, "mongodb://bunny:bunny@localhost:27017/bunny", "bunny")
+	cli, err := NewMongoClient(ctx, "mongodb://koala:koala@localhost:27017/koala", "koala")
 	if err != nil {
 		t.Errorf("Failed to create mongo client: %v", err)
 	}
@@ -80,7 +80,7 @@ func TestGetList(t *testing.T) {
 		Name string `bson:"name"`
 	}
 	var target []Test
-	err = cli.FindMany(ctx, "test", map[string]any{"name": "bunny"}, 2, 2, &target)
+	err = cli.FindMany(ctx, "test", map[string]any{"name": "koala"}, 2, 2, &target)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -91,14 +91,14 @@ func TestGetList(t *testing.T) {
 
 func TestUpdateOne(t *testing.T) {
 	ctx := context.TODO()
-	cli, err := NewMongoClient(ctx, "mongodb://bunny:bunny@localhost:27017/bunny", "bunny")
+	cli, err := NewMongoClient(ctx, "mongodb://koala:koala@localhost:27017/koala", "koala")
 	if err != nil {
 		t.Errorf("Failed to create mongo client: %v", err)
 	}
 	type Test struct {
 		Name string
 	}
-	err = cli.UpdateOne(ctx, "test", map[string]any{"name": "bunny"}, map[string]any{"$set": map[string]any{"name": "bunny-update"}})
+	err = cli.UpdateOne(ctx, "test", map[string]any{"name": "koala"}, map[string]any{"$set": map[string]any{"name": "koala-update"}})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -106,14 +106,14 @@ func TestUpdateOne(t *testing.T) {
 
 func TestUpdateMany(t *testing.T) {
 	ctx := context.TODO()
-	cli, err := NewMongoClient(ctx, "mongodb://bunny:bunny@localhost:27017/bunny", "bunny")
+	cli, err := NewMongoClient(ctx, "mongodb://koala:koala@localhost:27017/koala", "koala")
 	if err != nil {
 		t.Errorf("Failed to create mongo client: %v", err)
 	}
 	type Test struct {
 		Name string
 	}
-	err = cli.UpdateMany(ctx, "test", map[string]any{"name": "bunny"}, map[string]any{"$set": map[string]any{"name": "bunny-update"}})
+	err = cli.UpdateMany(ctx, "test", map[string]any{"name": "koala"}, map[string]any{"$set": map[string]any{"name": "koala-update"}})
 	if err != nil {
 		t.Fatal(err)
 	}

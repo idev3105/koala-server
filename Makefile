@@ -29,13 +29,13 @@ consumer:
 
 # Build target
 build:
-	$(GOBUILD) -o ./bin/bunny .
+	$(GOBUILD) -o ./bin/koala .
 
 migrate-up:
-	migrate -database postgresql://bunny:bunny@localhost:5432/bunny?sslmode=disable -path db/migrations up
+	migrate -database postgresql://koala:koala@localhost:5432/koala?sslmode=disable -path db/migrations up
 
 migrate-down:
-	migrate -database postgresql://bunny:bunny@localhost:5432/bunny?sslmode=disable -path db/migrations down 1
+	migrate -database postgresql://koala:koala@localhost:5432/koala?sslmode=disable -path db/migrations down 1
 
 migrate-create:
 	migrate create -ext sql -dir db/migrations -tz utc $(name)
