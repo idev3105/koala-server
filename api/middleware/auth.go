@@ -19,7 +19,7 @@ func AuthGuard(appCtx *app.AppContext) echo.MiddlewareFunc {
 			if ctx.Request().Header.Get("Authorization") == "" && appCtx.Config.Env == enum.Dev {
 				return next(ctx)
 			}
-			tokenRaw := tokenutil.GetTokenFromHeader(*ctx.Request())
+			tokenRaw := tokenutil.GetTokenFromHeader(ctx.Request())
 
 			isValid, err := tokenutil.Verify(ctx.Request().Context(), tokenRaw, appCtx.Config.JWKsUrl)
 			if err != nil || !isValid {
@@ -33,7 +33,7 @@ func AuthGuard(appCtx *app.AppContext) echo.MiddlewareFunc {
 			}
 			userId := token.Subject()
 
-			userRepo := di.NewUserRepository(sqlc_generated.New(appCtx.Db), appCtx.RedisCli)
+			userRepo := di.NewUserRepository(sqlc_generated.New(appCtx.Db), appCtx.Redis)
 
 			user, err := userRepo.FindByUserId(ctx.Request().Context(), userId)
 			if err != nil {

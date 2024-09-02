@@ -57,125 +57,125 @@ paths:
   /movies:
     post:
       consumes:
-      - application/json
+        - application/json
       operationId: CreateMovie
       parameters:
-      - description: name
-        in: body
-        name: movie
-        required: true
-        schema:
-          $ref: '#/definitions/CreateMovieRequest'
+        - description: name
+          in: body
+          name: movie
+          required: true
+          schema:
+            $ref: "#/definitions/CreateMovieRequest"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/MovieDto'
+            $ref: "#/definitions/MovieDto"
       security:
-      - ApiKeyAuth: []
+        - ApiKeyAuth: []
       summary: Create new movie
       tags:
-      - movie
+        - movie
   /movies/{id}/vote:
     post:
       consumes:
-      - application/json
+        - application/json
       description: Upvote or downvote a movie
       operationId: VoteMovie
       parameters:
-      - description: Movie ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Vote details
-        in: body
-        name: vote
-        required: true
-        schema:
-          $ref: '#/definitions/VoteMovieRequest'
+        - description: Movie ID
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Vote details
+          in: body
+          name: vote
+          required: true
+          schema:
+            $ref: "#/definitions/VoteMovieRequest"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/MovieDto'
+            $ref: "#/definitions/MovieDto"
       security:
-      - ApiKeyAuth: []
+        - ApiKeyAuth: []
       summary: Vote for a movie
       tags:
-      - movie
+        - movie
   /users:
     post:
       consumes:
-      - application/json
+        - application/json
       description: Create new user
       operationId: CreateUser
       parameters:
-      - description: username
-        in: body
-        name: user
-        required: true
-        schema:
-          $ref: '#/definitions/CreateUserRequest'
+        - description: username
+          in: body
+          name: user
+          required: true
+          schema:
+            $ref: "#/definitions/CreateUserRequest"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/UserDto'
+            $ref: "#/definitions/UserDto"
       security:
-      - ApiKeyAuth: []
+        - ApiKeyAuth: []
       summary: Create new user
       tags:
-      - user
+        - user
   /users/{id}:
     get:
       consumes:
-      - application/json
+        - application/json
       description: Get user by user id
       operationId: GetUserByUserId
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: string
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: string
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/UserDto'
+            $ref: "#/definitions/UserDto"
       summary: Get user by user id
       tags:
-      - user
+        - user
   /users/exists:
     post:
       consumes:
-      - application/json
+        - application/json
       description: Check user exist
       operationId: existsUserByIdToken
       parameters:
-      - description: idToken
-        in: body
-        name: idToken
-        required: true
-        schema:
-          $ref: '#/definitions/CheckUserByIdTokenRequest'
+        - description: idToken
+          in: body
+          name: idToken
+          required: true
+          schema:
+            $ref: "#/definitions/CheckUserByIdTokenRequest"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/CheckUserByIdTokenResponse'
+            $ref: "#/definitions/CheckUserByIdTokenResponse"
       summary: Check exist user by id token
       tags:
-      - user
+        - user
 swagger: "2.0"
