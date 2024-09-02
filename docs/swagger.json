@@ -46,6 +46,53 @@
                 }
             }
         },
+        "/movies/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update the details of an existing movie",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "movie"
+                ],
+                "summary": "Update movie details",
+                "operationId": "UpdateMovie",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Movie ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated movie details",
+                        "name": "movie",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateMovieRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/MovieDto"
+                        }
+                    }
+                }
+            }
+        },
         "/movies/{id}/vote": {
             "post": {
                 "security": [
@@ -95,6 +142,11 @@
         },
         "/users": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create new user",
                 "consumes": [
                     "application/json"
@@ -195,36 +247,6 @@
                     }
                 }
             }
-        },
-        "/user/{id}": {
-            "get": {
-                "description": "Get user by userId",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "user"
-                ],
-                "summary": "Get user by userId",
-                "operationId": "GetUserByUserId",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "userId",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
         }
     },
     "definitions": {
@@ -277,6 +299,20 @@
                 },
                 "id": {
                     "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "thumbnailUrl": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateMovieRequest": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"

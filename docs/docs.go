@@ -54,6 +54,53 @@ const docTemplate = `{
                 }
             }
         },
+        "/movies/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update the details of an existing movie",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "movie"
+                ],
+                "summary": "Update movie details",
+                "operationId": "UpdateMovie",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Movie ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated movie details",
+                        "name": "movie",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateMovieRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/MovieDto"
+                        }
+                    }
+                }
+            }
+        },
         "/movies/{id}/vote": {
             "post": {
                 "security": [
@@ -103,6 +150,11 @@ const docTemplate = `{
         },
         "/users": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create new user",
                 "consumes": [
                     "application/json"
@@ -131,7 +183,6 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/UserDto"
-<<<<<<< HEAD
                         }
                     }
                 }
@@ -200,46 +251,13 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/UserDto"
-=======
->>>>>>> 2f70bd9a6d46fd663ad8c27226efac4b39f29cc6
                         }
-                    }
-                }
-            }
-        },
-        "/user/{id}": {
-            "get": {
-                "description": "Get user by userId",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "user"
-                ],
-                "summary": "Get user by userId",
-                "operationId": "GetUserByUserId",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "userId",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
                     }
                 }
             }
         }
     },
     "definitions": {
-<<<<<<< HEAD
         "CheckUserByIdTokenRequest": {
             "type": "object",
             "properties": {
@@ -298,8 +316,20 @@ const docTemplate = `{
                 }
             }
         },
-=======
->>>>>>> 2f70bd9a6d46fd663ad8c27226efac4b39f29cc6
+        "UpdateMovieRequest": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "thumbnailUrl": {
+                    "type": "string"
+                }
+            }
+        },
         "UserDto": {
             "type": "object",
             "properties": {

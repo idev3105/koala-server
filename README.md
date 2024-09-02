@@ -1,75 +1,117 @@
-# Bunny
+# Movie App Backend
 
-### A Template Starter for Go Web Applications
+Welcome to the backend of the Movie App! This project provides the server-side functionality for managing movies, users, and reviews.
 
----
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 ## Introduction
 
-As a developer, you understand the challenges of setting up a new project with all the necessary tools and a clean, tidy architecture. That's why Bunny was born.
-
----
+The Movie App Backend is a RESTful API built to handle the data and business logic for a movie application. It allows users to browse movies, read reviews, and manage their profiles.
 
 ## Features
 
-- **Web Framework**: [Echo](https://echo.labstack.com/)
-- **SQL Client**: [sqlc](https://github.com/sqlc-dev/sqlc)
-- **Build Tool**: [GNU Make](https://www.gnu.org/software/make/manual/make.html#Rule-Introduction)
-- **Databases**: MySQL, PostgreSQL, SQLite, MongoDB
-- **Caching**: [Redis](https://redis.io/)
-- **Migration**: [Go-Migrate](https://github.com/golang-migrate/migrate)
-- **Pub/Sub**: [Kafka](https://kafka.apache.org/)
-- **Live Reload**: [Air](https://github.com/cosmtrek/air)
+- User authentication and authorization
+- CRUD operations for movies
+- User reviews and ratings
+- Search and filter movies
+- Secure and scalable architecture
 
----
+## Technologies
 
-## Getting Started
+- **Programming Language:** [Node.js](https://nodejs.org/)
+- **Framework:** [Express.js](https://expressjs.com/)
+- **Database:** [MongoDB](https://www.mongodb.com/)
+- **Authentication:** [JWT](https://jwt.io/)
+- **Environment Management:** [dotenv](https://www.npmjs.com/package/dotenv)
 
-1. **Clone the repository**:
+## Installation
 
-   ```sh
-   git clone https://github.com/yourusername/bunny.git
-   cd bunny
-   ```
+To get a local copy up and running, follow these steps:
 
-2. **Install dependencies**:
+1. **Clone the repository:**
 
    ```sh
-   make install
+   git clone https://github.com/your-username/movie-app-backend.git
    ```
 
-3. **Run the server**:
+2. **Navigate to the project directory:**
 
    ```sh
-   make serve-dev
+   cd movie-app-backend
    ```
 
-4. **Run the consumer**:
+3. **Install dependencies:**
 
    ```sh
-   make consumer name=example
+   npm install
    ```
 
----
+4. **Set up environment variables:**
+   Create a `.env` file in the root directory and add the following:
+
+   ```env
+   PORT=5000
+   MONGODB_URI=your_mongodb_uri
+   JWT_SECRET=your_jwt_secret
+   ```
+
+5. **Start the server:**
+   ```sh
+   npm start
+   ```
+
+## Usage
+
+Once the server is running, you can access the API at `http://localhost:5000`.
+
+## API Endpoints
+
+Here are some of the main endpoints available in the API:
+
+- **Movies:**
+
+  - `GET /api/movies` - Get all movies
+  - `GET /api/movies/:id` - Get a single movie by ID
+  - `POST /api/movies` - Create a new movie
+  - `PUT /api/movies/:id` - Update a movie by ID
+  - `DELETE /api/movies/:id` - Delete a movie by ID
+
+- **Users:**
+
+  - `POST /api/users/register` - Register a new user
+  - `POST /api/users/login` - Login a user
+  - `GET /api/users/profile` - Get user profile (requires authentication)
+
+- **Reviews:**
+  - `POST /api/movies/:id/reviews` - Add a review to a movie (requires authentication)
+  - `GET /api/movies/:id/reviews` - Get all reviews for a movie
 
 ## Contributing
 
-We welcome contributions! Please see our [contributing guidelines](CONTRIBUTING.md) for more details.
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
----
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
+Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-For any inquiries, please contact [yourname@domain.com](mailto:yourname@domain.com).
+Your Name - [your-email@example.com](mailto:your-email@example.com)
 
----
-
-## Acknowledgements
-
-Special thanks to all the contributors and the open-source community for their invaluable support.
+Project Link: [https://github.com/your-username/movie-app-backend](https://github.com/your-username/movie-app-backend)
