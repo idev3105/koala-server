@@ -7,6 +7,7 @@ Welcome to the backend of the Movie App! This project provides the server-side f
 - [Introduction](#introduction)
 - [Features](#features)
 - [Technologies](#technologies)
+- [Architecture](#architecture)
 - [Installation](#installation)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
@@ -33,6 +34,15 @@ The Movie App Backend is a RESTful API built to handle the data and business log
 - **Database:** [MongoDB](https://www.mongodb.com/)
 - **Authentication:** [JWT](https://jwt.io/)
 - **Environment Management:** [dotenv](https://www.npmjs.com/package/dotenv)
+
+## Architecture
+
+The project follows a clean architecture approach, with the following layers:
+
+- **API Layer:** Handles HTTP requests and responses.
+- **Service Layer:** Contains business logic.
+- **Repository Layer:** Handles data access.
+- **Model Layer:** Defines the data structure and rules.
 
 ## Installation
 
