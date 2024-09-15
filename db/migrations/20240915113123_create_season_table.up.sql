@@ -1,0 +1,21 @@
+CREATE TABLE d_seasons (
+    id SERIAL PRIMARY KEY,
+    movie_id VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    thumbnail_url TEXT,
+    progression_status VARCHAR(50),
+    available_status VARCHAR(50),
+    release_year INT,
+    rate FLOAT,
+    total_rate INT,
+    total_viewer INT,
+    total_upvote INT,
+    total_downvote INT,
+    "order" INT,
+    total_episode INT,
+    created_by VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(255),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

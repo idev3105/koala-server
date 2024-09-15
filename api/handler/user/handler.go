@@ -108,7 +108,7 @@ func (u *UserHandler) ExistsUserByIdToken() echo.HandlerFunc {
 		}
 		userId := token.Subject()
 
-		userUseCase := di.NewUserUseCase(sqlc_generated.New(u.appCtx.Db), u.appCtx.RedisCli)
+		userUseCase := di.NewUserUseCase(sqlc_generated.New(u.appCtx.Db), u.appCtx.Redis)
 		exist, err := userUseCase.ExistsByUserId(ctx.Request().Context(), userId)
 		if err != nil {
 			panic(err)

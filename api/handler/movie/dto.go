@@ -1,5 +1,7 @@
 package moviehandler
 
+import "org.idev.koala/backend/common/message"
+
 type CreateMovieRequest struct {
 	Name         string `json:"name"`
 	Description  string `json:"description"`
@@ -8,7 +10,7 @@ type CreateMovieRequest struct {
 } // @name CreateMovieRequest
 
 type MovieDto struct {
-	Id           int32  `json:"id"`
+	MovieID      string `json:"id"`
 	Name         string `json:"name"`
 	Description  string `json:"description"`
 	ThumbnailUrl string `json:"thumbnailUrl"`
@@ -18,3 +20,16 @@ type MovieDto struct {
 type VoteMovieRequest struct {
 	VoteType string `json:"voteType"`
 } // @name VoteMovieRequest
+
+type UpdateMovieRequest struct {
+	Name         string `json:"name"`
+	Description  string `json:"description"`
+	ThumbnailUrl string `json:"thumbnailUrl"`
+} // @name UpdateMovieRequest
+
+type MovieVotedMessage struct {
+	message.BaseMessage
+	MovieID  string `json:"movie_id"`
+	UserID   string `json:"user_id"`
+	VoteType string `json:"vote_type"`
+} // @name MovieVotedMessage

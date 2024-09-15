@@ -8,6 +8,7 @@ import (
 type Movie struct {
 	commonentity.BaseEntity
 	Id              int32                      `json:"id,omitempty"`
+	MovieID         string                     `json:"movieId,omitempty"`
 	ItemStatus      string                     `json:"itemStatus,omitempty"`
 	Name            string                     `json:"name,omitempty"`
 	Description     string                     `json:"description,omitempty"`

@@ -17,6 +17,7 @@ func AuthGuard(appCtx *app.AppContext) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(ctx echo.Context) error {
 			if ctx.Request().Header.Get("Authorization") == "" && appCtx.Config.Env == enum.Dev {
+				ctx.Set("user_id", "user123")
 				return next(ctx)
 			}
 			tokenRaw := tokenutil.GetTokenFromHeader(ctx.Request())

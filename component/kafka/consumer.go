@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/IBM/sarama"
-	"org.idev.bunny/backend/common/logger"
+	"org.idev.koala/backend/common/logger"
 )
 
 type Consumer struct {
@@ -46,7 +46,7 @@ func (c *Consumer) Consume(ctx context.Context, onReceive func(message []byte) e
 	var wg sync.WaitGroup
 
 	for _, partition := range partitions {
-		pc, err := c.client.ConsumePartition(c.Topic, partition, sarama.OffsetNewest)
+		pc, err := c.client.ConsumePartition(c.Topic, partition, sarama.OffsetOldest)
 		if err != nil {
 			return fmt.Errorf("failed to start consumer for partition %d: %w", partition, err)
 		}
