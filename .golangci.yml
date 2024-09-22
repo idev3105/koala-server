@@ -1,8 +1,5 @@
 run:
   timeout: 5m
-  skip-dirs:
-    - "vendor"
-    - "generated"
 
 linters:
   enable:
@@ -29,17 +26,17 @@ linters:
     - whitespace
     - revive
     - copyloopvar
-
 issues:
   exclude-rules:
     - path: _test\.go
       linters:
         - errcheck
+  exclude-dirs:
+    - generated
+    - vendor
 
-# Specific linter settings
 linters-settings:
   revive:
-    # Recommended configuration from revive's README
     rules:
       - name: exported
         arguments:
