@@ -7,3 +7,7 @@ const (
 	AvailableStatus_Active   AvailableStatus = "ACTIVE"
 	AvailableStatus_Inactive AvailableStatus = "INACTIVE"
 )
+
+func (s AvailableStatus) String() string {
+	return string(s)
+}

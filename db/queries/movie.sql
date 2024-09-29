@@ -2,8 +2,8 @@
 INSERT INTO d_movies (
         movie_id,
         item_status,
-        title,
-        description,
+        "name",
+        "description",
         thumbnail_url,
         available_status,
         types,
@@ -31,8 +31,8 @@ RETURNING *;
 -- name: UpdateMovie :one
 UPDATE d_movies
 SET item_status = COALESCE($2, item_status),
-    title = COALESCE($3, title),
-    description = COALESCE($4, description),
+    "name" = COALESCE($3, "name"),
+    "description" = COALESCE($4, "description"),
     thumbnail_url = COALESCE($5, thumbnail_url),
     available_status = COALESCE($6, available_status),
     types = COALESCE($7, types),

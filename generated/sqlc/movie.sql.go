@@ -111,8 +111,8 @@ const createMovie = `-- name: CreateMovie :one
 INSERT INTO d_movies (
         movie_id,
         item_status,
-        title,
-        description,
+        "name",
+        "description",
         thumbnail_url,
         available_status,
         types,
@@ -136,13 +136,13 @@ VALUES (
         $11,
         $12
     )
-RETURNING id, movie_id, item_status, title, description, thumbnail_url, available_status, types, release_year, total_viewer, total_upvote, total_downvote, total_rate, rate, created_at, updated_at, created_by, updated_by
+RETURNING id, movie_id, item_status, name, description, thumbnail_url, available_status, types, release_year, total_viewer, total_upvote, total_downvote, total_rate, rate, created_at, updated_at, created_by, updated_by
 `
 
 type CreateMovieParams struct {
 	MovieID         string
 	ItemStatus      string
-	Title           string
+	Name            string
 	Description     string
 	ThumbnailUrl    pgtype.Text
 	AvailableStatus string
@@ -158,7 +158,7 @@ func (q *Queries) CreateMovie(ctx context.Context, arg CreateMovieParams) (Movie
 	row := q.db.QueryRow(ctx, createMovie,
 		arg.MovieID,
 		arg.ItemStatus,
-		arg.Title,
+		arg.Name,
 		arg.Description,
 		arg.ThumbnailUrl,
 		arg.AvailableStatus,
@@ -174,7 +174,7 @@ func (q *Queries) CreateMovie(ctx context.Context, arg CreateMovieParams) (Movie
 		&i.ID,
 		&i.MovieID,
 		&i.ItemStatus,
-		&i.Title,
+		&i.Name,
 		&i.Description,
 		&i.ThumbnailUrl,
 		&i.AvailableStatus,
@@ -342,7 +342,7 @@ func (q *Queries) GetEpisodesBySeasonId(ctx context.Context, arg GetEpisodesBySe
 }
 
 const getMovieById = `-- name: GetMovieById :one
-SELECT id, movie_id, item_status, title, description, thumbnail_url, available_status, types, release_year, total_viewer, total_upvote, total_downvote, total_rate, rate, created_at, updated_at, created_by, updated_by
+SELECT id, movie_id, item_status, name, description, thumbnail_url, available_status, types, release_year, total_viewer, total_upvote, total_downvote, total_rate, rate, created_at, updated_at, created_by, updated_by
 FROM d_movies
 WHERE movie_id = $1
 `
@@ -354,7 +354,7 @@ func (q *Queries) GetMovieById(ctx context.Context, movieID string) (Movie, erro
 		&i.ID,
 		&i.MovieID,
 		&i.ItemStatus,
-		&i.Title,
+		&i.Name,
 		&i.Description,
 		&i.ThumbnailUrl,
 		&i.AvailableStatus,
@@ -505,8 +505,8 @@ func (q *Queries) UpdateEpisode(ctx context.Context, arg UpdateEpisodeParams) (D
 const updateMovie = `-- name: UpdateMovie :one
 UPDATE d_movies
 SET item_status = COALESCE($2, item_status),
-    title = COALESCE($3, title),
-    description = COALESCE($4, description),
+    "name" = COALESCE($3, "name"),
+    "description" = COALESCE($4, "description"),
     thumbnail_url = COALESCE($5, thumbnail_url),
     available_status = COALESCE($6, available_status),
     types = COALESCE($7, types),
@@ -514,13 +514,13 @@ SET item_status = COALESCE($2, item_status),
     updated_by = COALESCE($9, updated_by),
     updated_at = COALESCE($10, updated_at)
 WHERE movie_id = $1
-RETURNING id, movie_id, item_status, title, description, thumbnail_url, available_status, types, release_year, total_viewer, total_upvote, total_downvote, total_rate, rate, created_at, updated_at, created_by, updated_by
+RETURNING id, movie_id, item_status, name, description, thumbnail_url, available_status, types, release_year, total_viewer, total_upvote, total_downvote, total_rate, rate, created_at, updated_at, created_by, updated_by
 `
 
 type UpdateMovieParams struct {
 	MovieID         string
 	ItemStatus      string
-	Title           string
+	Name            string
 	Description     string
 	ThumbnailUrl    pgtype.Text
 	AvailableStatus string
@@ -534,7 +534,7 @@ func (q *Queries) UpdateMovie(ctx context.Context, arg UpdateMovieParams) (Movie
 	row := q.db.QueryRow(ctx, updateMovie,
 		arg.MovieID,
 		arg.ItemStatus,
-		arg.Title,
+		arg.Name,
 		arg.Description,
 		arg.ThumbnailUrl,
 		arg.AvailableStatus,
@@ -548,7 +548,7 @@ func (q *Queries) UpdateMovie(ctx context.Context, arg UpdateMovieParams) (Movie
 		&i.ID,
 		&i.MovieID,
 		&i.ItemStatus,
-		&i.Title,
+		&i.Name,
 		&i.Description,
 		&i.ThumbnailUrl,
 		&i.AvailableStatus,

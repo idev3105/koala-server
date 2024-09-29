@@ -57,7 +57,7 @@ type Movie struct {
 	ID              int64
 	MovieID         string
 	ItemStatus      string
-	Title           string
+	Name            string
 	Description     string
 	ThumbnailUrl    pgtype.Text
 	AvailableStatus string
