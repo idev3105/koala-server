@@ -56,19 +56,17 @@ lint-fix:
 	golangci-lint run --fix .
 
 lint-changes:
-	@changed_files=$$(git status --porcelain | grep -E '^(M|A|R|C)' | awk '{print $$2}' | grep '\.go$$'); \
-	if [ -n "$$changed_files" ]; then \
+	@if [ -n "$$(git status --porcelain | grep -E '^(M|A|R|C)' | awk '{print $$2}' | grep '\.go$$')" ]; then \
 		echo "Running golangci-lint on changed files..."; \
-		golangci-lint run $$changed_files; \
+		golangci-lint run --new-from-rev=HEAD; \
 	else \
 		echo "No Go files changed. Skipping lint."; \
 	fi
 
 lint-fix-changes:
-	@changed_files=$$(git status --porcelain | grep -E '^(M|A|R|C)' | awk '{print $$2}' | grep '\.go$$'); \
-	if [ -n "$$changed_files" ]; then \
+	@if [ -n "$$(git status --porcelain | grep -E '^(M|A|R|C)' | awk '{print $$2}' | grep '\.go$$')" ]; then \
 		echo "Running golangci-lint --fix on changed files..."; \
-		golangci-lint run --fix $$changed_files; \
+		golangci-lint run --fix --new-from-rev=HEAD; \
 	else \
 		echo "No Go files changed. Skipping lint."; \
 	fi
