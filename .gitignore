@@ -21,9 +21,6 @@ go.work
 # Docker data
 docker_data/
 
-# Generated files
-generated/
-
 # temporary files
 tmp/
 
