@@ -35,8 +35,8 @@ func (r *MovieRepo) UpdateSeason(ctx context.Context, season *movieentity.Season
 	return r.sqlRepo.UpdateSeason(ctx, season)
 }
 
-func (r *MovieRepo) GetSeasonsByMovieId(ctx context.Context, movieId string, seasonId string) ([]movieentity.Season, error) {
-	return r.sqlRepo.GetSeasonsByMovieId(ctx, movieId, seasonId)
+func (r *MovieRepo) GetSeasonsByMovieId(ctx context.Context, movieId string) ([]movieentity.Season, error) {
+	return r.sqlRepo.GetSeasonsByMovieId(ctx, movieId)
 }
 
 func (r *MovieRepo) CreateEpisode(ctx context.Context, seasonId string, episode *movieentity.Episode) (*movieentity.Episode, error) {
@@ -47,6 +47,6 @@ func (r *MovieRepo) UpdateEpisode(ctx context.Context, episode *movieentity.Epis
 	return r.sqlRepo.UpdateEpisode(ctx, episode)
 }
 
-func (r *MovieRepo) GetEpisodesBySeasonId(ctx context.Context, seasonId string, episodeId string) ([]movieentity.Episode, error) {
-	return r.sqlRepo.GetEpisodesBySeasonId(ctx, seasonId, episodeId)
+func (r *MovieRepo) GetEpisodesBySeasonId(ctx context.Context, seasonId string) ([]movieentity.Episode, error) {
+	return r.sqlRepo.GetEpisodesBySeasonId(ctx, seasonId)
 }

@@ -7,3 +7,7 @@ const (
 	ProgressionStatus_OnGoing  ProgressionStatus = "ONGOING"
 	ProgressionStatus_Ended    ProgressionStatus = "ENDED"
 )
+
+func (s ProgressionStatus) String() string {
+	return string(s)
+}

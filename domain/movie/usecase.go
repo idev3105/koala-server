@@ -51,8 +51,8 @@ func (uc *movieUseCase) UpdateSeason(ctx context.Context, season *movieentity.Se
 	return uc.repo.UpdateSeason(ctx, season)
 }
 
-func (uc *movieUseCase) GetSeasonsByMovieId(ctx context.Context, movieId, seasonId string) ([]movieentity.Season, error) {
-	return uc.repo.GetSeasonsByMovieId(ctx, movieId, seasonId)
+func (uc *movieUseCase) GetSeasonsByMovieId(ctx context.Context, movieId string) ([]movieentity.Season, error) {
+	return uc.repo.GetSeasonsByMovieId(ctx, movieId)
 }
 
 func (uc *movieUseCase) VoteSeason(ctx context.Context, seasonId, userId string, isUpvote bool) (*movieentity.Season, error) {
@@ -74,8 +74,8 @@ func (uc *movieUseCase) UpdateEpisode(ctx context.Context, episode *movieentity.
 	return uc.repo.UpdateEpisode(ctx, episode)
 }
 
-func (uc *movieUseCase) GetEpisodesBySeasonId(ctx context.Context, seasonId, episodeId string) ([]movieentity.Episode, error) {
-	return uc.repo.GetEpisodesBySeasonId(ctx, seasonId, episodeId)
+func (uc *movieUseCase) GetEpisodesBySeasonId(ctx context.Context, seasonId string) ([]movieentity.Episode, error) {
+	return uc.repo.GetEpisodesBySeasonId(ctx, seasonId)
 }
 
 func (uc *movieUseCase) VoteEpisode(ctx context.Context, episodeId, userId string, isUpvote bool) (*movieentity.Episode, error) {

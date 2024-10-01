@@ -13,11 +13,11 @@ type MovieRepository interface {
 
 	CreateSeason(ctx context.Context, movieId string, season *movieentity.Season) (*movieentity.Season, error)
 	UpdateSeason(ctx context.Context, season *movieentity.Season) (*movieentity.Season, error)
-	GetSeasonsByMovieId(ctx context.Context, movieId string, seasonId string) ([]movieentity.Season, error)
+	GetSeasonsByMovieId(ctx context.Context, movieId string) ([]movieentity.Season, error)
 
 	CreateEpisode(ctx context.Context, seasonId string, episode *movieentity.Episode) (*movieentity.Episode, error)
 	UpdateEpisode(ctx context.Context, episode *movieentity.Episode) (*movieentity.Episode, error)
-	GetEpisodesBySeasonId(ctx context.Context, seasonId string, episodeId string) ([]movieentity.Episode, error)
+	GetEpisodesBySeasonId(ctx context.Context, seasonId string) ([]movieentity.Episode, error)
 }
 
 type MovieUseCase interface {
@@ -29,13 +29,13 @@ type MovieUseCase interface {
 
 	CreateSeason(ctx context.Context, movieId string, season *movieentity.Season) (*movieentity.Season, error)
 	UpdateSeason(ctx context.Context, season *movieentity.Season) (*movieentity.Season, error)
-	GetSeasonsByMovieId(ctx context.Context, movieId, seasonId string) ([]movieentity.Season, error)
+	GetSeasonsByMovieId(ctx context.Context, movieId string) ([]movieentity.Season, error)
 	VoteSeason(ctx context.Context, seasonId, userId string, isUpvote bool) (*movieentity.Season, error)
 	RateSeason(ctx context.Context, seasonId, userId string, rate float32) (*movieentity.Season, error)
 
 	CreateEpisode(ctx context.Context, seasonId string, episode *movieentity.Episode) (*movieentity.Episode, error)
 	UpdateEpisode(ctx context.Context, episode *movieentity.Episode) (*movieentity.Episode, error)
-	GetEpisodesBySeasonId(ctx context.Context, seasonId, episodeId string) ([]movieentity.Episode, error)
+	GetEpisodesBySeasonId(ctx context.Context, seasonId string) ([]movieentity.Episode, error)
 	VoteEpisode(ctx context.Context, episodeId, userId string, isUpvote bool) (*movieentity.Episode, error)
 	RateEpisode(ctx context.Context, episodeId, userId string, rate float32) (*movieentity.Episode, error)
 }
