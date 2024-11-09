@@ -1,5 +1,6 @@
 {
     "editor.formatOnSave": true,
+    "go.goroot": "/Users/idev/.gvm/versions/go1.22.3.darwin.arm64",
     "go.lintTool": "golangci-lint",
     "go.lintFlags": [
         "--fast"
@@ -9,5 +10,8 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports": "always"
         }
-    }
+    },
+    "go.toolsEnvVars": {
+        "GOPATH": "/Users/idev/.gvm/versions/go1.22.3.darwin.arm64"
+    },
 }
