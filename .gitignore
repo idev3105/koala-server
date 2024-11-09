@@ -26,3 +26,6 @@ tmp/
 
 # Environment variables file
 .env
+
+scripts
+test
