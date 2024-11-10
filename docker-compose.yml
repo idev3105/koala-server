@@ -34,12 +34,6 @@ services:
       - POSTGRESQL_USERNAME=koala # change to your username
       - POSTGRESQL_PASSWORD=koala # change to yser password
       - POSTGRESQL_DATABASE=koala # change to your database name
-  bytebase:
-    image: bytebase/bytebase:2.16.0
-    ports:
-      - 28080:8080
-    volumes:
-      - ./docker_data/bytebase:/var/opt/bytebase
   zookeeper:
     image: "bitnami/zookeeper:latest"
     environment:
@@ -84,3 +78,15 @@ services:
       - 5601:5601
     depends_on:
       - elasticsearch
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./docker_data/minio:/data
+    environment:
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: password
+    command: server --console-address ":9001" /data
