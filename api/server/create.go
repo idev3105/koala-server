@@ -7,6 +7,9 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/labstack/gommon/log"
+	"github.com/minio/minio-go/v7"
+	"github.com/minio/minio-go/v7/pkg/credentials"
 	echoSwagger "github.com/swaggo/echo-swagger"
 	appMiddleware "org.idev.koala/backend/api/middleware"
 	"org.idev.koala/backend/api/route"
@@ -16,6 +19,7 @@ import (
 	"org.idev.koala/backend/component/kafka"
 	"org.idev.koala/backend/component/mongo"
 	"org.idev.koala/backend/component/redis"
+	"org.idev.koala/backend/component/storage"
 )
 
 func Create(ctx context.Context) (*Server, error) {
@@ -84,6 +88,13 @@ func setupComponents(ctx context.Context, appCtx *app.AppContext, config *app.Co
 		}
 	}
 
+	if config.EnableStorage {
+		appCtx.StorageCli, err = setupStorage(config.StorageHost, config.StoragePort, config.StorageId, config.StorageSecret)
+		if err != nil {
+			return errors.Wrap(err, "failed to setup storage")
+		}
+	}
+
 	return nil
 }
 
@@ -118,10 +129,25 @@ func setupKafka(host string, port int32, log *logger.Logger) (*kafka.Producer, e
 	return kafka.NewProducer(host, port)
 }
 
+func setupStorage(host string, port int32, id string, secret string) (*storage.StorageClient, error) {
+	log.Info(fmt.Sprintf("Connecting to Storage: %s:%d", host, port))
+	minioClient, err := minio.New("localhost:9000", &minio.Options{
+		Creds:  credentials.NewStaticV4(id, secret, ""),
+		Secure: false,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return storage.NewStorageClient(minioClient)
+}
+
 func setupRoutes(e *echo.Echo, appCtx *app.AppContext) {
 	route.NewExamplePanicErrorRouter(e)
 
 	v1 := e.Group("/api/v1")
 	route.NewUserRouter(v1, appCtx)
 	route.NewMovieRouter(v1, appCtx)
+
+	storage := e.Group("/storage")
+	route.NewMovieStorageRouter(storage, appCtx)
 }

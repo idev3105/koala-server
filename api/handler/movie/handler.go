@@ -1,6 +1,7 @@
 package moviehandler
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -10,9 +11,12 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/labstack/echo/v4"
+	"github.com/minio/minio-go/v7"
+	"github.com/minio/minio-go/v7/pkg/credentials"
 	"org.idev.koala/backend/api/di"
 	"org.idev.koala/backend/app"
 	"org.idev.koala/backend/component/kafka"
+	"org.idev.koala/backend/component/storage"
 	movieentity "org.idev.koala/backend/domain/movie/entity"
 	sqlc_generated "org.idev.koala/backend/generated/sqlc"
 	"org.idev.koala/backend/utils"
@@ -263,6 +267,63 @@ func (handler *MovieHandler) StreamMovieVotes() echo.HandlerFunc {
 				c.Response().Flush()
 			}
 		}
+	}
+}
+
+func (handler *MovieHandler) GetEpisodeVideo() echo.HandlerFunc {
+	return func(ctx echo.Context) error {
+		// Get movie ID and episode ID from the request parameters
+		movieId := ctx.Param("id")
+		episodeId := ctx.Param("episodeId")
+
+		minioClient, err := minio.New("localhost:9000", &minio.Options{
+			Creds:  credentials.NewStaticV4("VyFSnAYniNzObtDYBEZm", "fuEbxCsFXa3PxFkF2vi9wFcFjui07ETgbIp93dRH", ""),
+			Secure: false,
+		})
+		if err != nil {
+			return ctx.NoContent(http.StatusInternalServerError)
+		}
+		cli, err := storage.NewStorageClient(minioClient)
+		if err != nil {
+			return ctx.NoContent(http.StatusInternalServerError)
+		}
+		playlistKey := fmt.Sprintf("%s/%s/playlist.m3u8", movieId, episodeId)
+		data, err := cli.Get(ctx.Request().Context(), "movies", playlistKey)
+
+		if err != nil {
+			return ctx.NoContent(http.StatusInternalServerError)
+		}
+
+		ctx.Response().Header().Set(echo.HeaderContentType, "application/vnd.apple.mpegurl")
+		return ctx.Stream(http.StatusOK, "application/vnd.apple.mpegurl", bytes.NewReader(data))
+	}
+}
+
+func (handler *MovieHandler) GetVideoSegment() echo.HandlerFunc {
+	return func(ctx echo.Context) error {
+		movieId := ctx.Param("id")
+		episodeId := ctx.Param("episodeId")
+		segmentId := ctx.Param("segmentId")
+
+		minioClient, err := minio.New("localhost:9000", &minio.Options{
+			Creds:  credentials.NewStaticV4("VyFSnAYniNzObtDYBEZm", "fuEbxCsFXa3PxFkF2vi9wFcFjui07ETgbIp93dRH", ""),
+			Secure: false,
+		})
+		if err != nil {
+			return ctx.NoContent(http.StatusInternalServerError)
+		}
+		cli, err := storage.NewStorageClient(minioClient)
+		if err != nil {
+			return ctx.NoContent(http.StatusInternalServerError)
+		}
+		data, err := cli.Get(ctx.Request().Context(), "movies", fmt.Sprintf("%s/%s/%s", movieId, episodeId, segmentId))
+
+		if err != nil {
+			return ctx.NoContent(http.StatusInternalServerError)
+		}
+
+		ctx.Response().Header().Set(echo.HeaderContentType, "application/vnd.apple.mpegurl")
+		return ctx.Stream(http.StatusOK, "application/vnd.apple.mpegurl", bytes.NewReader(data))
 	}
 }
 

@@ -23,6 +23,12 @@ type Config struct {
 	MongoUrl    string `mapstructure:"MONGO_URL"`
 	MongoDbName string `mapstructure:"MONGO_DB_NAME"`
 
+	EnableStorage bool   `mapstructure:"ENABLE_STORAGE"`
+	StorageHost   string `mapstructure:"STORAGE_HOST"`
+	StoragePort   int32  `mapstructure:"STORAGE_PORT"`
+	StorageId     string `mapstructure:"STORAGE_ID"`
+	StorageSecret string `mapstructure:"STORAGE_SECRET"`
+
 	JWKsUrl string `mapstructure:"JWKS_URL"`
 }
 

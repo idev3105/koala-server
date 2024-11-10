@@ -7,6 +7,7 @@ import (
 	"org.idev.koala/backend/component/kafka"
 	"org.idev.koala/backend/component/mongo"
 	"org.idev.koala/backend/component/redis"
+	"org.idev.koala/backend/component/storage"
 )
 
 // Contain app context
@@ -17,4 +18,5 @@ type AppContext struct {
 	Redis         *redis.Client
 	KafkaProducer *kafka.Producer
 	Mongo         *mongo.Client
+	StorageCli    *storage.StorageClient
 }
