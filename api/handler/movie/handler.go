@@ -11,12 +11,9 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/labstack/echo/v4"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/credentials"
 	"org.idev.koala/backend/api/di"
 	"org.idev.koala/backend/app"
 	"org.idev.koala/backend/component/kafka"
-	"org.idev.koala/backend/component/storage"
 	movieentity "org.idev.koala/backend/domain/movie/entity"
 	sqlc_generated "org.idev.koala/backend/generated/sqlc"
 	"org.idev.koala/backend/utils"
@@ -257,7 +254,9 @@ func (handler *MovieHandler) StreamMovieVotes() echo.HandlerFunc {
 			select {
 			case vote := <-voteChan:
 				fmt.Println(vote)
-				c.Response().Write([]byte(vote))
+				if _, err := c.Response().Write([]byte(vote)); err != nil {
+					return err
+				}
 				c.Response().Flush()
 			case <-c.Request().Context().Done():
 				close(voteChan)
@@ -276,19 +275,8 @@ func (handler *MovieHandler) GetEpisodeVideo() echo.HandlerFunc {
 		movieId := ctx.Param("id")
 		episodeId := ctx.Param("episodeId")
 
-		minioClient, err := minio.New("localhost:9000", &minio.Options{
-			Creds:  credentials.NewStaticV4("VyFSnAYniNzObtDYBEZm", "fuEbxCsFXa3PxFkF2vi9wFcFjui07ETgbIp93dRH", ""),
-			Secure: false,
-		})
-		if err != nil {
-			return ctx.NoContent(http.StatusInternalServerError)
-		}
-		cli, err := storage.NewStorageClient(minioClient)
-		if err != nil {
-			return ctx.NoContent(http.StatusInternalServerError)
-		}
 		playlistKey := fmt.Sprintf("%s/%s/playlist.m3u8", movieId, episodeId)
-		data, err := cli.Get(ctx.Request().Context(), "movies", playlistKey)
+		data, err := handler.appCtx.StorageCli.Get(ctx.Request().Context(), "movies", playlistKey)
 
 		if err != nil {
 			return ctx.NoContent(http.StatusInternalServerError)
@@ -305,18 +293,7 @@ func (handler *MovieHandler) GetVideoSegment() echo.HandlerFunc {
 		episodeId := ctx.Param("episodeId")
 		segmentId := ctx.Param("segmentId")
 
-		minioClient, err := minio.New("localhost:9000", &minio.Options{
-			Creds:  credentials.NewStaticV4("VyFSnAYniNzObtDYBEZm", "fuEbxCsFXa3PxFkF2vi9wFcFjui07ETgbIp93dRH", ""),
-			Secure: false,
-		})
-		if err != nil {
-			return ctx.NoContent(http.StatusInternalServerError)
-		}
-		cli, err := storage.NewStorageClient(minioClient)
-		if err != nil {
-			return ctx.NoContent(http.StatusInternalServerError)
-		}
-		data, err := cli.Get(ctx.Request().Context(), "movies", fmt.Sprintf("%s/%s/%s", movieId, episodeId, segmentId))
+		data, err := handler.appCtx.StorageCli.Get(ctx.Request().Context(), "movies", fmt.Sprintf("%s/%s/%s", movieId, episodeId, segmentId))
 
 		if err != nil {
 			return ctx.NoContent(http.StatusInternalServerError)
